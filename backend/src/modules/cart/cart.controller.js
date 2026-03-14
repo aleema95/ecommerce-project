@@ -14,15 +14,23 @@ export const getUserCart = async (req, res) => {
 
 export const addItem = async (req, res) => {
 
-  const { productId, quantity } = req.body;
+  try {
+    const { productId, quantity } = req.body;
+  
+    const cart = await addToCart(
+      req.user.id,
+      productId,
+      quantity
+    );
+  
+    res.json(cart);
+    
+  } catch (error) {
+    res.status(400).json({
+      message: error.message
+    })
+  }
 
-  const cart = await addToCart(
-    req.user.id,
-    productId,
-    quantity
-  );
-
-  res.json(cart);
 };
 
 export const removeItem = async (req, res) => {

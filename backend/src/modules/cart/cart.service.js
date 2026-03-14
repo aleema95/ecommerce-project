@@ -1,4 +1,5 @@
 import redisClient from "../../config/redis.js";
+import { Product } from "../../models/index.js";
 
 const getCartKey = (userId) => `cart:${userId}`;
 
@@ -16,6 +17,10 @@ export const addToCart = async (userId, productId, quantity) => {
   const key = getCartKey(userId);
 
   const cart = await getCart(userId);
+
+  const productExist = await Product.findByPk(productId)
+
+  if(!productExist) throw Error('Product does not exist!')
 
   const existing = cart.find(item => item.productId === productId);
 
