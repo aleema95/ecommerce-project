@@ -12,6 +12,9 @@ const app = express();
 // security headers
 app.use(helmet());
 
+// routes
+app.use("/api", routes);
+
 // enable cors
 app.use(cors());
 
@@ -21,7 +24,5 @@ app.use(express.json());
 // request logger
 app.use(morgan("dev"));
 
-// routes
-app.use("/api", routes);
 
 export default app;

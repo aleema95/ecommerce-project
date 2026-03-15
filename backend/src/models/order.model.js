@@ -23,6 +23,15 @@ export default (sequelize) => {
     status: {
       type: DataTypes.STRING,
       defaultValue: "pending"
+    },
+    
+    payment_status: {
+      type: DataTypes.STRING,
+      defaultValue: "unpaid"
+    },
+
+    payment_intent: {
+      type: DataTypes.STRING
     }
 
   }, {
