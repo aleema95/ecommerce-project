@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+
+  api:
+    build: .
+    container_name: ecommerce_api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    environment:
+      - DB_HOST=postgres
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=ecommerce
+      - REDIS_HOST=redis-12677.c114.us-east-1-4.ec2.cloud.redislabs.com
+      - REDIS_PORT=12677
+      - REDIS_USERNAME=default
+      - REDIS_PASSWORD=b6OC6qxMG2wXplMpscIKS3y1zg8UFYGO
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - CLIENT_URL=http://localhost:3000
+    volumes:
+      - .:/app
+    command: npm run dev
+
+  postgres:
+    image: postgres:15
+    container_name: ecommerce_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: ecommerce
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
