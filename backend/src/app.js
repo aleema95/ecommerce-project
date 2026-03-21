@@ -15,12 +15,11 @@ app.use(helmet());
 // body parser
 app.use(express.json());
 
-// routes
-app.use("/api", routes);
-
 // enable cors
 app.use(cors());
 
+// routes
+app.use("/api", routes);
 
 // request logger
 app.use(morgan("dev"));

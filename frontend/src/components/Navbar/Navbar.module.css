@@ -1,0 +1,27 @@
+.container {
+    background-color: var(--color-principal);
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-fuentes);
+}
+
+.home {
+    padding: 15px;
+}
+
+.navigation{
+    display: flex;
+}
+
+.navigation h2 {
+    padding: 15px;
+}
+
+.userNavigation {
+    display: flex;
+}
+
+.userNavigation h2 {
+    padding: 15px;
+}
