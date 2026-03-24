@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../features/auth/authSlice.js";
+import style from "./LoginForm.module.css"
 
 function LoginForm() {
     const dispatch = useDispatch();
@@ -11,6 +12,10 @@ function LoginForm() {
     });
     const user = useSelector((state) => state.auth.user)
     const status = useSelector((state) => state.auth.status)
+
+    useEffect(() =>{
+        localStorage.setItem("token", user.token)
+    } ,[user])
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -23,33 +28,33 @@ function LoginForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log("asd")
         dispatch(fetchUser(formData));
     }
     return (
-       <div className="container">
-        <form onSubmit={handleSubmit}>
+       <div className={style.mainContainer}>
+        <form className={style.formContainer} onSubmit={handleSubmit}>
             <h2>Login</h2>
+            <div className={style.inputContainer}>
+                <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                />
 
-            <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            />
+                <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                />
+            </div>
 
-            <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            />
-
-            <button type="submit">Login</button>
+            <button className={style.loginBtn}>Login</button>
         </form>
        </div>
     )

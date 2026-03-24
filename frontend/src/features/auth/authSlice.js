@@ -3,8 +3,8 @@ import axios from "axios"
 
 const initialState = {
   user: null,
-  status:"idle",
-  error: null
+  isAuthenticated: false,
+  status: "idle"
 };
 
 const authSlice = createSlice({
@@ -12,7 +12,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
 
-  extraReducers: (builder) => {
+    extraReducers: (builder) => {
     builder
 
       .addCase(fetchUser.pending, (state) => {
@@ -22,6 +22,7 @@ const authSlice = createSlice({
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.user = action.payload;
+        state.isAuthenticated = true;
       })
 
       .addCase(fetchUser.rejected, (state, action) => {
@@ -34,25 +35,24 @@ const authSlice = createSlice({
 export const fetchUser = createAsyncThunk(
   "auth/fetchUser",
   async ({ email, password }) => {
+    try {
 
-    const response = await axios.post(
+      const response = await axios.post(
         "https://ecommerce-project-1bfx.onrender.com/api/users/login",
         {
-            email,
-            password
+          email,
+          password
         }
-    )
+      );
 
-    console.log(response.data)
-    
-    if (!response.ok) {
-      throw new Error("Invalid credentials");
+      return response.data;
+
+    } catch (error) {
+      throw new Error(error.response?.data?.message || "Login failed");
     }
-
-    return response.data;
   }
 );
 
-export const { login, logout } = authSlice.actions;
+export const {} = authSlice.actions;
 
 export default authSlice.reducer;
