@@ -10,12 +10,6 @@ function LoginForm() {
     email: "",
     password: "",
     });
-    const user = useSelector((state) => state.auth.user)
-    const status = useSelector((state) => state.auth.status)
-
-  //  useEffect(() =>{
-  //      localStorage.setItem("token", user.token)
-  //  } ,[user])
 
     function handleChange(e) {
         const { name, value } = e.target;

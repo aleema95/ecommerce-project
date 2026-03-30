@@ -1,0 +1,28 @@
+.container {
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 200px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-principal);
+    color: var(--color-fuentes);
+}
+
+.itemName {
+    padding: 20px 0px;
+}
+
+.stockContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0px;
+    
+}
+
+.itemStock {
+    padding: 5px 0px;
+}

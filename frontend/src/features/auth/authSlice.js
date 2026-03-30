@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios"
+import { act } from "react";
 
 const initialState = {
   user: null,
@@ -44,7 +45,8 @@ export const fetchUser = createAsyncThunk(
           password
         }
       );
-
+      localStorage.setItem("token", response.data.token)
+      window.location.reload();
       return response.data;
 
     } catch (error) {
