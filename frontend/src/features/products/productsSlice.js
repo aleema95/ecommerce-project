@@ -101,12 +101,7 @@ export const createProduct = createAsyncThunk(
 
     const response = await axios.post(
       "https://ecommerce-project-1bfx.onrender.com/api/products/",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      }
+      formData
     );
 
     return response.data;
