@@ -25,7 +25,11 @@ export default (sequelize) => {
     stock: {
       type: DataTypes.INTEGER,
       defaultValue: 0
-    }
+    },
+    image_url: {
+    type: DataTypes.STRING,
+    allowNull: true
+    } 
 
   }, {
     tableName: "products",

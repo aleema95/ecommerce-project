@@ -43,6 +43,22 @@ const productsSlice = createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
+
+      //CREATE PRODUCT
+      .addCase(createProduct.pending, (state) => {
+        state.status = "loading";
+      })
+
+      .addCase(createProduct.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        // add product instantly to store
+        state.products.push(action.payload);
+      })
+
+      .addCase(createProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   }
 });
 
@@ -78,6 +94,25 @@ export const fetchProductById = createAsyncThunk(
     }
   }
 );
+
+export const createProduct = createAsyncThunk(
+  "products/createProduct",
+  async (formData) => {
+
+    const response = await axios.post(
+      "https://ecommerce-project-1bfx.onrender.com/api/products/",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }
+    );
+
+    return response.data;
+  }
+);
+
 
 export const {} = productsSlice.actions;
 

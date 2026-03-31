@@ -22,6 +22,33 @@ export const getProduct = async (req, res) => {
 };
 
 export const createProduct = async (req, res) => {
-  const product = await addProduct(req.body);
-  res.status(201).json(product);
+    try {
+
+    let imageUrl = null;
+    
+    console.log(req.file)
+
+    if (req.file) {
+
+      const result = await cloudinary.uploader.upload(
+        `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`
+      );
+
+      imageUrl = result.secure_url;
+
+    }
+
+    const productData = {
+      ...req.body,
+      image_url: imageUrl
+    };
+
+    const product = await addProduct(productData);
+
+    res.status(201).json(product);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
 };
