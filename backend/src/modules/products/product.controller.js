@@ -22,7 +22,8 @@ export const getProduct = async (req, res) => {
 };
 
 export const createProduct = async (req, res) => {
-    console.log("create product hit")
+    console.log("BODY", req.bodu)
+    console.log("FILE", req.file)
     try {
 
     let imageUrl = null;
