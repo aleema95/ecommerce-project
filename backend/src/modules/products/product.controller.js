@@ -25,17 +25,17 @@ export const createProduct = async (req, res) => {
     try {
 
     let imageUrl = null;
-    
-    console.log(req.file)
+
 
     if (req.file) {
 
       const result = await cloudinary.uploader.upload(
         `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`
       );
+      console.log("result", result)
 
       imageUrl = result.secure_url;
-
+      console.log("imageUrl", imageUrl)
     }
 
     const productData = {

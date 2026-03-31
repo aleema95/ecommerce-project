@@ -50,6 +50,7 @@ export const addProduct = async (data) => {
 
   const product = await Product.create(data);
 
+  console.log("product", product)
   //Borra el cache porque cambia al agregarse un producto
   await redisClient.del("products:all");
 
