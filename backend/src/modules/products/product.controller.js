@@ -22,6 +22,7 @@ export const getProduct = async (req, res) => {
 };
 
 export const createProduct = async (req, res) => {
+    console.log("create product hit")
     try {
 
     let imageUrl = null;
