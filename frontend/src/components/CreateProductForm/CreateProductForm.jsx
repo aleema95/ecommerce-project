@@ -78,7 +78,7 @@ function CreateProduct() {
       />
 
       <input
-        name="file"
+        name="image"
         type="file"
         accept="image/*"
         onChange={(e) => setImage(e.target.files[0])}

@@ -7,7 +7,6 @@ const CACHE_TTL = 3600;
 export const fetchProducts = async () => {
 
   const cache = await redisClient.get("products:all");
-  console.log(cache)
   if (cache) {
     return JSON.parse(cache);
   }
@@ -50,7 +49,6 @@ export const addProduct = async (data) => {
 
   const product = await Product.create(data);
 
-  console.log("product", product)
   //Borra el cache porque cambia al agregarse un producto
   await redisClient.del("products:all");
 

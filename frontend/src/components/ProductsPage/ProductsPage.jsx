@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../features/products/productsSlice";
 import ProductCard from "../ProductCard/ProductCard";
 import { Link } from "react-router-dom";
+import style from "./ProductsPage.module.css"
 
 function ProductsPage() {
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ function ProductsPage() {
         <>
             <h1>Products Page</h1>
             {products.map( product => (
-                <Link key={product.id}  to={`/product/${product.id}`}>
+                <Link className={style.link} key={product.id}  to={`/product/${product.id}`}>
                     <ProductCard key={product.id}
                                 {...product}
                                 />

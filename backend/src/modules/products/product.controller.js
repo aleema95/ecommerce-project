@@ -3,6 +3,7 @@ import {
   fetchProduct,
   addProduct
 } from "./product.service.js";
+import cloudinary from "../../config/cloudinary.js";
 
 export const getProducts = async (req, res) => {
   const products = await fetchProducts();
@@ -22,22 +23,20 @@ export const getProduct = async (req, res) => {
 };
 
 export const createProduct = async (req, res) => {
-    console.log("BODY", req.bodu)
-    console.log("FILE", req.file)
+
     try {
+      
+      let imageUrl = null;
+      
+      
+      if (req.file) {
 
-    let imageUrl = null;
-
-
-    if (req.file) {
 
       const result = await cloudinary.uploader.upload(
         `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`
       );
-      console.log("result", result)
 
       imageUrl = result.secure_url;
-      console.log("imageUrl", imageUrl)
     }
 
     const productData = {
@@ -50,6 +49,7 @@ export const createProduct = async (req, res) => {
     res.status(201).json(product);
 
   } catch (error) {
+    console.error(error)
     res.status(500).json({ error: error.message });
   }
 

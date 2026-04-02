@@ -1,0 +1,29 @@
+
+.productName {
+    text-align: center;
+    margin: 20px;
+    color: var(--color-fuentes);
+}
+
+.imageInfoContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.productDescription {
+    margin-top: 20px;
+}
+
+.priceStockContainer {
+    margin-bottom: 20px;
+}
+
+.priceStockContainer h2{
+    margin-top: 20px;
+}
